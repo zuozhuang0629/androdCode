@@ -54,4 +54,92 @@ public static void swap(int a, int b) {
 分析：  
 在swap()方法中，<code>a</code>，<code>b</code>的制进行交换，影不影响<code>num1</code>，<code>num2</code>。因为，<code>a</code>，<code>b</code>的值，只是将<code>num1</code>，<code>num2</code>的值进行复制过来的。也就是说，<code>a</code>，<code>b</code>相当于<code>num1</code>，</code><code>num2</code>的副本，副本的内容无论怎么修改，都不会影响到原数据本身
 
-![alt 属性文本](./1.jpeg)
+<!-- ![alt 属性文本](./1.jpeg) -->
+
+通过上面的例子，我们已经知道一个方法不能修改基本数据类型的参数，但是当引用类型作为参数的是否一样，请看下面案例
+###  案例2：引用数据类型参数
+代码：
+~~~
+public static void main(String[] args) throws Exception {
+        User user = new User();
+        user.name = "zhangsan";
+        user.age = 18;
+        fun1(user);
+        System.out.println(user.name);
+        System.out.println(user.age);
+    }
+
+static void fun1(User u){
+    u.name="lisi";
+    u.age=20;
+
+    System.out.println(u.name);
+    System.out.println(u.age);
+
+}
+
+public static class User{
+    public String name;
+    public int age;
+    
+}
+~~~
+输出
+~~~
+lisi
+20
+lisi
+20
+~~~
+
+解析：  
+ 当把引用类型<code>user</code>作为参数时，并且在<code>fun1</code>中修改形参<code>u</code>的<code>name</code>，<code>age</code>属性时，在原有的实参<code>user</code>中<code>name</code>，<code>age</code>也被修改。看到上面的案例，很多人会觉得，当参数为引用类型的时候，传递方式为引用传递，但事实真的是是这样的吗？别慌，我们在看结合看一下下面的案例
+
+### 案例3 引用数据类型参数
+代码：
+~~~
+public static void main(String[] args) throws Exception {
+        User user = new User();
+        user.name = "zhangsan";
+        user.age = 18;
+        fun1(user);
+        System.out.println(user.name);
+        System.out.println(user.age);
+}
+
+static void fun1(User u){
+    //重新new一个User
+    u= new User();
+    u.name="lisi";
+    u.age=20;
+
+    System.out.println(u.name);
+    System.out.println(u.age);
+
+}
+
+public static class User{
+    public String name;
+    public int age;
+    
+}
+~~~
+输出：
+~~~
+lisi
+20
+zhangsan
+18
+~~~
+
+解析：  
+在fun1中我们对参数重新new一个新的<code>User</code>，在修改<code>name</code>，<code>age</code>属性，我们发现实参<code>user</code>的<code>name</code>，<code>age</code>并没有被修改，所以当参数为引用类型时，不是引用传递，也是值传递   
+
+**重点：**  
+当引用类型作为参数时，其实就是把引用类型的地址复制作为参数传递，所以在案例2中，实参和形参他们都是指向同一块地址，我们修改形参<code>u</code>时，实参<code>user</code>，的内容也被修改，在案例3中，当我们把形参<code>u</code>重新赋值的时候，实参实参和形参指向不同地址，所以我们在修改形参的<code>name</code>，<code>age</code>时并不会修改实参的<code>name</code>，<code>age</code>
+
+**java中是值传递**
+
+
+
+
