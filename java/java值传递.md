@@ -67,7 +67,7 @@ public static void main(String[] args) throws Exception {
         fun1(user);
         System.out.println(user.name);
         System.out.println(user.age);
-    }
+}
 
 static void fun1(User u){
     u.name="lisi";
@@ -136,9 +136,9 @@ zhangsan
 在fun1中我们对参数重新new一个新的<code>User</code>，在修改<code>name</code>，<code>age</code>属性，我们发现实参<code>user</code>的<code>name</code>，<code>age</code>并没有被修改，所以当参数为引用类型时，不是引用传递，也是值传递   
 
 **重点：**  
-当引用类型作为参数时，其实就是把引用类型的地址复制作为参数传递，所以在案例2中，实参和形参他们都是指向同一块地址，我们修改形参<code>u</code>时，实参<code>user</code>，的内容也被修改，在案例3中，当我们把形参<code>u</code>重新赋值的时候，实参实参和形参指向不同地址，所以我们在修改形参的<code>name</code>，<code>age</code>时并不会修改实参的<code>name</code>，<code>age</code>
+当引用类型作为参数时，其实就是把引用类型的地址复制作为参数传递，所以在案例2中，实参和形参他们都是指向同一块地址，我们修改形参<code>u</code>时，实参<code>user</code>，的内容也被修改，在案例3中，当我们把形参<code>u</code>重新赋值的时候，实参和形参指向不同地址，所以我们在修改形参的<code>name</code>，<code>age</code>时并不会修改实参的<code>name</code>，<code>age</code>
 
-**java中是值传递**
+**Java中是值传递**
 
 
 
