@@ -10,6 +10,14 @@
 * 数据结构
 * 线程
 
+## Jetpack  
+* WorkManager
+* Room
+* Navigation
+* Camerax
+* Hilt
+* Paging
+
 ## 设计模式
 * 创建型模式    
 
