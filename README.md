@@ -18,13 +18,16 @@
 ### Android 基础
 * Android 四大组件
 * Android 自定义view
+* [Handel 机制](./android/handler.md)
+* 事件传递机制
+* View绘制流程
 
 ## Jetpack  
 * WorkManager
 * Room
 * Navigation
 * Camerax
-* Hilt
+* [Hilt](./jetpack/hilt.md)
 * Paging
 
 ## 设计模式
