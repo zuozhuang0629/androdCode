@@ -10,6 +10,11 @@
 * 数据结构
 * 线程
 
+## Kotlin 知识
+**详情可看[koltin官方文档](https://www.kotlincn.net/docs/reference/)**
+
+* [可见性修饰符](./kotlin/%E5%8F%AF%E8%A7%81%E6%80%A7%E4%BF%AE%E9%A5%B0%E7%AC%A6.md)
+
 ### Android 基础
 * Android 四大组件
 * Android 自定义view
