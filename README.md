@@ -14,6 +14,8 @@
 **详情可看[koltin官方文档](https://www.kotlincn.net/docs/reference/)**
 
 * [可见性修饰符](./kotlin/%E5%8F%AF%E8%A7%81%E6%80%A7%E4%BF%AE%E9%A5%B0%E7%AC%A6.md)
+* [扩展](./kotlin/%E6%89%A9%E5%B1%95.md)
+* [代理](./kotlin/%E4%BB%A3%E7%90%86.md)
 
 ### Android 基础
 * Android 四大组件
