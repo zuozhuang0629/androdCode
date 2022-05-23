@@ -138,7 +138,7 @@ zhangsan
 **重点：**  
 当引用类型作为参数时，其实就是把引用类型的地址复制作为参数传递，所以在案例2中，实参和形参他们都是指向同一块地址，我们修改形参<code>u</code>时，实参<code>user</code>，的内容也被修改，在案例3中，当我们把形参<code>u</code>重新赋值的时候，实参和形参指向不同地址，所以我们在修改形参的<code>name</code>，<code>age</code>时并不会修改实参的<code>name</code>，<code>age</code>
 
-# j
+# 结论
 
 **Java中是值传递**
 
