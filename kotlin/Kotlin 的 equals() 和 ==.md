@@ -89,14 +89,6 @@ true
 解析：
 因为a，b都是基本书籍类型，所以比较的是值
 
-val a = "a"
-val b = "a"
-System.out.println(a === b);
-输出结果：
-true
-解析：
-因为string是重写了equals()方法内部比较的是值
-
 class User(val name:String){}
 val zhangsan = User("zhangsan")
 val lisi = User("lisi")
@@ -109,4 +101,7 @@ true
 解析：
 因为User是引用数据类型，所以比较的是地址
 ~~~
-https://blog.csdn.net/qq_34589749/article/details/103646045
+## 总结
+在kotlin中我们可以这样理解
+- kotlin中<code>==</code>可以理解为Java中 <code>equals()</code>
+- kotlin中的<code>===</code>可以理解为java中的<code>==</code>
