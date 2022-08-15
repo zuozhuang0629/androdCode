@@ -1,9 +1,8 @@
 ---
 theme: channing-cyan
 ---
+携手创作，共同成长！这是我参与「掘金日新计划 · 8 月更文挑战」的第十四天，[点击查看活动详情](https://juejin.cn/post/7123120819437322247 "https://juejin.cn/post/7123120819437322247")
 
-# 重学Android之----Android消息机制系列(一)
-# Android消息机制
 
 ## 前言
 
@@ -58,5 +57,53 @@ void checkThread() {
 
 我们往后衍生一下，我们知道Android不允许在子线程中更新UI，那这个设计是为什么呢？这是因为在Android中UI不是线程安全的。如果在多线程中并发访问可能导致UI控件处于预科预期的情况。为什么不上锁？上锁就会影响性能，也会让逻辑变得复杂，所以采用了简单和高校的方法：采用单线程(主线程)来处理UI，对于开发也就使用`Handler`这个简单一举两得。
 
-下一篇我们将分析Android的消息机制
+## Handler的工作原理简单概括
 
+我们描述一下Handler的工作原理。Handler创建的时候会采用当前的Looper来构建的内部的循环系统。如果当前线程没有Looper就会抛出异常：
+
+~~~
+public Handler(@Nullable Callback callback, boolean async) {
+   ...
+    mLooper = Looper.myLooper();
+    if (mLooper == null) {
+        throw new RuntimeException(
+            "Can't create handler inside thread " + Thread.currentThread()
+                    + " that has not called Looper.prepare()");
+    }
+   ...
+}
+
+~~~
+
+解决这个问题其实很简单，只需要创建一个Looper即可，或者在创建Handler的时候传入一个Looper也可以。具体会在后面的章节详细。
+
+Handler创建完成后，这个时候其内部就会一个消息系统，Looper和MessageQueue就可以和Handler一起工作了。
+
+
+我们知道Handler发送消息有两个send和post方法，我们先看一下源码：
+
+~~~
+public final boolean postDelayed(@NonNull Runnable r, long delayMillis) {
+//这里我们看到postDelayed还是调用自身的sendMessageDelayed，我们接着去看sendMessageDelayed
+    return sendMessageDelayed(getPostMessage(r), delayMillis);
+}
+~~~
+
+~~~
+public final boolean sendMessageDelayed(@NonNull Message msg, long delayMillis) {
+    if (delayMillis < 0) {
+        delayMillis = 0;
+    }
+    return sendMessageAtTime(msg, SystemClock.uptimeMillis() + delayMillis);
+}
+~~~
+
+我们发现psot内部调用的也是send来完成的。我们来看一下send的工作过程。当我们调用send时候，它会调用`MessageQueue`的`enqueueMessage`方法将和这个消息放入消息队列中，然后Looper就会发现有新的消息，Looper就会处理这个消息，最终消息中的Runnable或者Handler的handleMessage就会被调用。
+
+> 注意：Looper运行是在Handler创建所在的线程中，这样一来Handler中的业务逻辑就被切换到创建Handler所在线程中去执行
+
+我们看一下流程图：
+
+![3057947d23453017950e3e8b7d2c0e49_1027x603.webp](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b47bad101ee04839b9112cce3abc2974~tplv-k3u1fbpfcp-watermark.image?)
+
+下一篇我们将分析Android的消息机制
